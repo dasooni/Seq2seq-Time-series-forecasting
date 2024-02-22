@@ -95,6 +95,27 @@ def getHourlyProduction_Germany(symbol = ['PRODEWINDON_ENTSOE', 'PRODESOL', 'PRO
                                    'other(MWh)', 'waste(MWh)', 'sol(MWh)'], start_date )
 # --
 
+# -- Metno
+def getHourlyTempAll(symbol = ['TEMPVALDRES', 'TEMPVIKSND', 'TEMPTYNSET', 'TEMPUVDAL', 'TEMPSTANGE', 
+                               'TEMPSTEINKJR', 'TEMPHONFSS', 'TEMPMOSJ', 'TEMPSVOLVR', 'TEMPHAMRFST', 
+                               'TEMPHARSTD', 'TEMPARNDL', 'TEMPBO', 'TEMPFLORO', 'TEMPSANDFJ', 
+                               'TEMPALESND', 'TEMPDRAMN', 'TEMPHAMAR', 'TEMPNOTODN', 'TEMPLHMR', 'TEMPFAG', 
+                               'TEMPOSL', 'TEMPKONG', 'TEMPMELS', 'TEMPSARP', 'TEMPFJER', 'TEMPBUHLM', 
+                               'TEMPGEILO', 'TEMPMOL', 'TEMPVIGR', 'TEMPTAFJ', 'TEMPVENA', 'TEMPSGNDL', 
+                               'TEMPSAUD', 'TEMPKRS', 'TEMPSTAV', 'TEMPBER', 'TEMPKRSU', 'TEMPSUNN', 
+                               'TEMPRORO', 'TEMPTRH', 'TEMPNMS', 'TEMPMAJA', 'TEMPBOD', 'TEMPTRM', 'TEMPALTA', 
+                               'TEMPSLT', 'TEMPFORDE', 'TEMPRENA'], start_date = start_data):
+    return fetch_skm_data(symbol, ['TEMPVALDRES', 'TEMPVIKSND', 'TEMPTYNSET', 'TEMPUVDAL', 'TEMPSTANGE', 
+                               'TEMPSTEINKJR', 'TEMPHONFSS', 'TEMPMOSJ', 'TEMPSVOLVR', 'TEMPHAMRFST', 
+                               'TEMPHARSTD', 'TEMPARNDL', 'TEMPBO', 'TEMPFLORO', 'TEMPSANDFJ', 
+                               'TEMPALESND', 'TEMPDRAMN', 'TEMPHAMAR', 'TEMPNOTODN', 'TEMPLHMR', 'TEMPFAG', 
+                               'TEMPOSL', 'TEMPKONG', 'TEMPMELS', 'TEMPSARP', 'TEMPFJER', 'TEMPBUHLM', 
+                               'TEMPGEILO', 'TEMPMOL', 'TEMPVIGR', 'TEMPTAFJ', 'TEMPVENA', 'TEMPSGNDL', 
+                               'TEMPSAUD', 'TEMPKRS', 'TEMPSTAV', 'TEMPBER', 'TEMPKRSU', 'TEMPSUNN', 
+                               'TEMPRORO', 'TEMPTRH', 'TEMPNMS', 'TEMPMAJA', 'TEMPBOD', 'TEMPTRM', 'TEMPALTA', 
+                               'TEMPSLT', 'TEMPFORDE', 'TEMPRENA'], start_date)
+# --
+
 # Example usage
 # test = data_extractor(['PROSE3'], ['ProductionGWh'], '01.01.2021')
 # print(test.describe())
