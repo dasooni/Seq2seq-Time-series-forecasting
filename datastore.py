@@ -1,7 +1,8 @@
 import pandas as pd
 import urllib.parse as url
 
-initial_date = '01.01.2019'
+#Due to SKM limiting data requests to 5 years at a time, we need to split the requests.
+initial_date = '01.01.2018'
 second_date = '01.01.2021'
 final_date = '0'
 final_date_forecast = 'd+7'
@@ -48,18 +49,12 @@ def getProductionGWh(symbol = ['PROSE1', 'PROSE2', 'PROSE3', 'PROSE4', 'PROSE'])
 def getConsumptionGWh(symbol = ['CNPSE1', 'CNPSE2', 'CNPSE3', 'CNPSE4', 'CNPSE']):
     return fetch_skm_data(symbol, ['ConsumptionSE1GWh','ConsumptionSE2GWh','ConsumptionSE3GWh','ConsumptionSE4GWh', 'ConsumptionALLGWh'])
 
-def getTransmissionCapTo(symbol = ['Transmission#Cap#DK1SE3', 'Transmission#Cap#NO1SE3', 
-                                   'Transmission#Cap#SE2SE3', 'Transmission#Cap#FISE3', 
-                                   'Transmission#Cap#SE4SE3', 'Transmission#Cap#SE3LSSE3']):
-    
-    return fetch_skm_data(symbol, ['TDK1SE3', 'TNO1SE3', 'TSE2SE3', 'TF1SE3', 'TSE4SE3', 'TLSE3SE3'] )
-
 def getCapacityTo(symbol = ['SCAPSE2SE3', 'SCAPDK1SE3', 'SCAPFISE3', 'SCAPSE4SE3']):
     return fetch_skm_data(symbol, ['SE2SE3', 'DK1SE3', 'FISE3', 'SE4SE3'] )
 
-def getOtherNordPoolData(symbol = ['EXHSE', 'EXHSE2_SE3', 'EXHSE4_SE3', 'REGSE3', 'TOVERSE3_SK']):
+def getOtherNordPoolData(symbol = ['EXHSE', 'EXHSE2_SE3', 'EXHSE4_SE3', 'TOVERSE3_SK']):
     
-    return fetch_skm_data(symbol, ['ExchangeSweden(GWh)', 'ExchangeSE2>SE3(GWh)', 'ExchangeSE4>SE3(GWh)', 'ReguSE3(EUR_MWh)', 'TurnoverSE3(MWh)'])
+    return fetch_skm_data(symbol, ['ExchangeSweden(GWh)', 'ExchangeSE2>SE3(GWh)', 'ExchangeSE4>SE3(GWh)', 'TurnoverSE3(MWh)'])
 # --
 
 # -- Svenska Kraftnät
@@ -75,10 +70,6 @@ def getAllSE4ProductionMWh(symbol = ['PROSE4WAT', 'PROSE4WINDON_ENTSOE', 'PROSE4
 # --
 
 # -- SMHI  
-# (FROM STOCKHOLM)
-def getDailyWeather_sthlm(symbol = ['TEMPSTO;DAY', 'PRECSTO;DAY']):
-    return fetch_skm_data(symbol, ['Temperature(day)', 'Precipitation(day)'])
-
 def getDailyWeather(symbol = ['TEMPSE;DAY', 'PENSE;DAY', 'PENNO;DAY', 'PENFI;DAY']):
     return fetch_skm_data(symbol, ['Temperature(day)', 'PrecipitationEnergySE(day)', 'PrecipitationEnergyNO(day)', 'PrecipitationEnergyFI(day)'])
 
@@ -95,25 +86,7 @@ def getDailyWeather_all(symbol = ['TEMPSUND;DAY', 'TEMPFALU;DAY', 'TEMPKARLK;DAY
                                    'TEMPGUNN;DAY', 'TEMPOSTE;DAY', 'TEMPLUND;DAY', 'TEMPSTAV;DAY', 'TEMPVENA;DAY', 'TEMPSAUD;DAY', 'TEMPMALU;DAY', 'TEMPFORD;DAY', 
                                    'TEMPARH;DAY', 'TEMPHEL;DAY', 'TEMPCOP;DAY', 'TEMPBARDU;DAY', 'TEMPVISBY;DAY', 'TEMPSARN;DAY', 'TEMPHAPA;DAY', 'TEMPKARE;DAY',
                                    'TEMPFRAN;DAY', 'TEMPBERL;DAY', 'TEMPPUD;DAY', 'TEMPSODA;DAY'] )
-#--a
-
-# -- Svensk Energi
-def getWeeklyHydroReservs(symbol = ['WATSE;WEEK', 'WATSE3;WEEK']):
-    return fetch_skm_data(symbol, ['HydroRes(GWh_week)', 'HydroResSE3(GWh_week)'] )
-#--
-
-# -- EEX, ENTSOE
-def getHourlyProduction_Germany_all(symbol = ['PRODEWINDON_ENTSOE', 'PRODESOL', 'PRODEGEOTHM_ENTSOE', 'PRODEBIO_ENTSOE', 'PRODEHCL_ENTSOE', 
-                                          'PRODEGAS_ENTSOE', 'PRODEOIL_ENTSOE', 'PRODELIG_ENTSOE', 'PRODENUC_ENTSOE', 'CNPDEPUMP_ENTSOE'
-                                          , 'PRODERNO_ENTSOE', 'PRODEWASTE_ENTSOE', 'PRODESOL_ENTSOE']):
-    return fetch_skm_data(symbol, ['wind(Mwh)', 'solar(Mwh)', 'trm(Mwh)', 'biomass(Mwh)', 'coal(MWh)', 
-                                   'gas(MWh)', 'oil(MWh)', 'lignite(MWh)', 'nuc(MWh)', 'pump(MWh)',
-                                   'other(MWh)', 'waste(MWh)', 'sol(MWh)'] )
     
-def getHourlyProduction_nuclear_EU(symbol = ['PROFINUC_ENTSOE', 'PRODENUC_ENTSOE']):
-    return fetch_skm_data(symbol, ['nucFI(MWh)', 'nucDE(MWh)'] )
-# --
-
 # -- Metno
 def getHourlyTempAll(symbol = ['TEMPVALDRES', 'TEMPVIKSND', 'TEMPTYNSET', 'TEMPUVDAL', 'TEMPSTANGE', 
                                'TEMPSTEINKJR', 'TEMPHONFSS', 'TEMPMOSJ', 'TEMPSVOLVR', 'TEMPHAMRFST', 
@@ -133,12 +106,29 @@ def getHourlyTempAll(symbol = ['TEMPVALDRES', 'TEMPVIKSND', 'TEMPTYNSET', 'TEMPU
                                'TEMPSAUD', 'TEMPKRS', 'TEMPSTAV', 'TEMPBER', 'TEMPKRSU', 'TEMPSUNN', 
                                'TEMPRORO', 'TEMPTRH', 'TEMPNMS', 'TEMPMAJA', 'TEMPBOD', 'TEMPTRM', 'TEMPALTA', 
                                'TEMPSLT', 'TEMPFORDE', 'TEMPRENA'])
+# --    
+
+# -- Svensk Energi
+def getWeeklyHydroReservs(symbol = ['WATSE;WEEK', 'WATSE3;WEEK']):
+    return fetch_skm_data(symbol, ['HydroRes(GWh_week)', 'HydroResSE3(GWh_week)'] )
+#--
+
+# -- EEX, ENTSOE
+def getHourlyProduction_Germany_all(symbol = ['PRODEWINDON_ENTSOE', 'PRODESOL', 'PRODEGEOTHM_ENTSOE', 'PRODEBIO_ENTSOE', 'PRODEHCL_ENTSOE', 
+                                          'PRODEGAS_ENTSOE', 'PRODEOIL_ENTSOE', 'PRODELIG_ENTSOE', 'PRODENUC_ENTSOE', 'CNPDEPUMP_ENTSOE'
+                                          , 'PRODERNO_ENTSOE', 'PRODEWASTE_ENTSOE']):
+    return fetch_skm_data(symbol, ['wind(Mwh)', 'solar(Mwh)', 'trm(Mwh)', 'biomass(Mwh)', 'coal(MWh)', 
+                                   'gas(MWh)', 'oil(MWh)', 'lignite(MWh)', 'nuc(MWh)', 'pump(MWh)',
+                                   'other(MWh)', 'waste(MWh)'] )
+    
+def getHourlyProduction_nuclear_EU(symbol = ['PROFINUC_ENTSOE', 'PRODENUC_ENTSOE']):
+    return fetch_skm_data(symbol, ['nucFI(MWh)', 'nucDE(MWh)'] )
 # --
 
 
 # -- PAST + FORECASTING DATA UMM
 
-def getStationCapForecast(symbol = ['Station#Cap#9297', 'Station#Cap#9309', 'Station#Cap#8007', 'Station#Cap#9280', 'Station#Cap#9282', 'Station#Cap#9421', 
+def getStationCap_forecast(symbol = ['Station#Cap#9297', 'Station#Cap#9309', 'Station#Cap#8007', 'Station#Cap#9280', 'Station#Cap#9282', 'Station#Cap#9421', 
                                     'Station#Cap#9343', 'Station#Cap#2983', 'Station#Cap#12422', 'Station#Cap#10222', 'Station#Cap#9377', 'Station#Cap#12831', 
                                     'Station#Cap#12833', 'Station#Cap#8016', 'Station#Cap#9284', 'Station#Cap#9286', 'Station#Cap#8011', 'Station#Cap#9288', 
                                     'Station#Cap#9290', 'Station#Cap#9292', 'Station#Cap#9401', 'Station#Cap#9415', 'Station#Cap#12717', 
@@ -150,8 +140,25 @@ def getStationCapForecast(symbol = ['Station#Cap#9297', 'Station#Cap#9309', 'Sta
                                    'sCapRinghalsB3', 'sCapRinghalsB4',  'sCapRyaKVV', 'sCapStenungsund', 'sCapSvartnas', 
                                    'sCapTrollhattan', 'sCapTrangslet', 'sCapVartan', 'sCapAlvkarleby', 
                                    'sCapAbyverket'], start_date=start_date, end_date=[second_date, final_date_forecast])
-
     
+    
+#There is no SE1 -> SE3 and SE3 -> SE1
+def getTransmissionCapTo_forecast(symbol = ['Transmission#Cap#DK1SE3', 'Transmission#Cap#NO1SE3', 
+                                   'Transmission#Cap#SE2SE3', 'Transmission#Cap#FISE3', 
+                                   'Transmission#Cap#SE4SE3']):
+    return fetch_skm_data(symbol, ['TDK1SE3', 'TNO1SE3', 'TSE2SE3', 'TF1SE3', 'TSE4SE3'] , start_date=start_date, end_date=[second_date, final_date_forecast])    
+
+def getTransmissionCapFrom_forecast(symbol = ['Transmission#Cap#SE3DK1', 'Transmission#Cap#SE3NO1', 
+                                   'Transmission#Cap#SE3SE2', 'Transmission#Cap#SE3FI', 
+                                   'Transmission#Cap#SE3SE4']):
+    return fetch_skm_data(symbol, ['TSE3DK1', 'TSE3NO1', 'TSE3SE2', 'TSE3F1', 'TSE3SE4'] , start_date=start_date, end_date=[second_date, final_date_forecast])    
+
+def getProductionCap_forecast(symbol = ['Import#Cap#SE3', 'Export#Cap#SE3', 'Nuclear#Cap#SE3', 
+                                       'Wind#Cap#SE3', 'Coal#Cap#SE3', 'Gas#Cap#SE3', 
+                                       'Hydro#Cap#SE3', 'Oil#Cap#SE3', 'Other#Cap#SE3']):
+    return fetch_skm_data(symbol, ['AvailableImportCap', 'AvailableExportCap', 'AvailableNuclearCap', 
+                                   'AvailableWindCap', 'AvailableCoalCap', 'AvailableGasCap',
+                                   'AvailableHydroCap', 'AvailableOilCap', 'AvailableCapOther'], start_date=start_date, end_date=[second_date, final_date_forecast])    
 
 # Example usage
 # test = data_extractor(['PROSE3'], ['ProductionGWh'], '01.01.2021')
