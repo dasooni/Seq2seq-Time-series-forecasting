@@ -44,10 +44,10 @@ def getSpotPrice(symbol = ['SPOTSE3']):
     return fetch_skm_data(symbol, ['spotPrice'] )
 
 #Hourly!
-def getProductionGWh(symbol = ['PROSE1', 'PROSE2', 'PROSE3', 'PROSE4', 'PROSE']):
-    return fetch_skm_data(symbol, ['ProductionSE1GWh', 'ProductionSE2GWh', 'ProductionSE3GWh', 'ProductionSE4GWh', 'ProductionALLGWh'])
-def getConsumptionGWh(symbol = ['CNPSE1', 'CNPSE2', 'CNPSE3', 'CNPSE4', 'CNPSE']):
-    return fetch_skm_data(symbol, ['ConsumptionSE1GWh','ConsumptionSE2GWh','ConsumptionSE3GWh','ConsumptionSE4GWh', 'ConsumptionALLGWh'])
+def getProductionGWh(symbol = ['PROSE1', 'PROSE2', 'PROSE3', 'PROSE4']):
+    return fetch_skm_data(symbol, ['ProductionSE1GWh', 'ProductionSE2GWh', 'ProductionSE3GWh', 'ProductionSE4GWh'])
+def getConsumptionGWh(symbol = ['CNPSE1', 'CNPSE2', 'CNPSE3', 'CNPSE4']):
+    return fetch_skm_data(symbol, ['ConsumptionSE1GWh','ConsumptionSE2GWh','ConsumptionSE3GWh','ConsumptionSE4GWh'])
 
 def getCapacityTo(symbol = ['SCAPSE2SE3', 'SCAPDK1SE3', 'SCAPFISE3', 'SCAPSE4SE3']):
     return fetch_skm_data(symbol, ['SE2SE3', 'DK1SE3', 'FISE3', 'SE4SE3'] )
@@ -58,13 +58,16 @@ def getOtherNordPoolData(symbol = ['EXHSE', 'EXHSE2_SE3', 'EXHSE4_SE3', 'TOVERSE
 # --
 
 # -- Svenska Kraftnät
-def getAllSE1ProductionMWh(symbol = ['PROSE1WAT', 'PROSE1WINDON_ENTSOE', 'PROSE1SOL', 'PROSE1TRM', 'PROSE1OTH']):
-    return fetch_skm_data(symbol, ['waterSE1(MWh)', 'windSE1(MWh)', 'solSE1MWh', 'trmSE1MWh', 'OthSE1MWh'] )
+
+def getAllSE1ProductionMWh(symbol = ['PROSE1WAT', 'PROSE1WINDON_ENTSOE', 'PROSE1TRM']):
+    return fetch_skm_data(symbol, ['waterSE1(MWh)', 'windSE1(MWh)', 'trmSE1MWh'] )
+
 def getAllSE2ProductionMWh(symbol = ['PROSE2WAT', 'PROSE2WINDON_ENTSOE', 'PROSE2SOL', 'PROSE2TRM', 'PROSE2OTH']):
     return fetch_skm_data(symbol, ['waterSE2(MWh)', 'windSE2(MWh)', 'solSE2MWh', 'trmSE2MWh', 'OthSE2MWh'] )
 
 def getAllSE3ProductionMWh(symbol = ['PROSE3WAT', 'PROSE3WINDON_ENTSOE', 'PROSE3NUC', 'PROSE3SOL', 'PROSE3TRM', 'PROSE3OTH']):
     return fetch_skm_data(symbol, ['waterSE3(MWh)', 'windSE3(MWh)', 'nucSE3(MWh)', 'solSE3MWh', 'trmSE3MWh', 'OthSE3MWh'] )
+
 def getAllSE4ProductionMWh(symbol = ['PROSE4WAT', 'PROSE4WINDON_ENTSOE', 'PROSE4SOL', 'PROSE4TRM', 'PROSE4OTH']):
     return fetch_skm_data(symbol, ['waterSE4(MWh)', 'windSE4(MWh)', 'solSE4MWh', 'trmSE4MWh', 'OthSE4MWh'] )
 # --
@@ -126,7 +129,7 @@ def getHourlyProduction_nuclear_EU(symbol = ['PROFINUC_ENTSOE', 'PRODENUC_ENTSOE
 # --
 
 
-# -- PAST + FORECASTING DATA UMM
+# -- PAST + WEEK AHEAD PLANNED DATA UMM
 
 def getStationCap_forecast(symbol = ['Station#Cap#9297', 'Station#Cap#9309', 'Station#Cap#8007', 'Station#Cap#9280', 'Station#Cap#9282', 'Station#Cap#9421', 
                                     'Station#Cap#9343', 'Station#Cap#2983', 'Station#Cap#12422', 'Station#Cap#10222', 'Station#Cap#9377', 'Station#Cap#12831', 

@@ -1,4 +1,9 @@
 # Will use these after all the other features are extracted
+# Calendar information is known as ordinal categorical variables
+# Ordinal meaning that the order of the categories is important
+# For example, Monday is before Tuesday, and Monday is after Sunday. 
+# Same applies to the other features, day of week etc. 
+
 def calendar_transformer(df):
     '''Extracts calendar features from datetime index'''
     from feature_engine.datetime import DatetimeFeatures
