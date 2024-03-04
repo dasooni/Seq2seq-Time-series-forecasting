@@ -51,10 +51,6 @@ def getConsumptionGWh(symbol = ['CNPSE1', 'CNPSE2', 'CNPSE3', 'CNPSE4']):
 
 def getCapacityTo(symbol = ['SCAPSE2SE3', 'SCAPDK1SE3', 'SCAPFISE3', 'SCAPSE4SE3']):
     return fetch_skm_data(symbol, ['SE2SE3', 'DK1SE3', 'FISE3', 'SE4SE3'] )
-
-def getOtherNordPoolData(symbol = ['EXHSE', 'EXHSE2_SE3', 'EXHSE4_SE3', 'TOVERSE3_SK']):
-    
-    return fetch_skm_data(symbol, ['ExchangeSweden(GWh)', 'ExchangeSE2>SE3(GWh)', 'ExchangeSE4>SE3(GWh)', 'TurnoverSE3(MWh)'])
 # --
 
 # -- Svenska Kraftnät
@@ -73,8 +69,10 @@ def getAllSE4ProductionMWh(symbol = ['PROSE4WAT', 'PROSE4WINDON_ENTSOE', 'PROSE4
 # --
 
 # -- SMHI  
-def getDailyWeather(symbol = ['TEMPSE;DAY', 'PENSE;DAY', 'PENNO;DAY', 'PENFI;DAY']):
-    return fetch_skm_data(symbol, ['Temperature(day)', 'PrecipitationEnergySE(day)', 'PrecipitationEnergyNO(day)', 'PrecipitationEnergyFI(day)'])
+def getDailyWeather(symbol = ['TEMPSE;DAY', 'PENSE;DAY' ]):
+    return fetch_skm_data(symbol, ['Temperature(day)', 'PrecipitationEnergySE(day)'])
+def getDailyPerEnergy_Norway_Finland(symbol = [ 'PENNO;DAY', 'PENFI;DAY']):
+    return fetch_skm_data(symbol, ['PrecipitationEnergyNO(day)', 'PrecipitationEnergyFI(day)'])
 
 def getDailyWeather_all(symbol = ['TEMPSUND;DAY', 'TEMPFALU;DAY', 'TEMPKARLK;DAY', 'TEMPRONNE;DAY', 'TEMPOSL;DAY', 'TEMPBER;DAY', 'TEMPTRH;DAY', 'TEMPTRM;DAY',
                                   'TEMPKRS;DAY', 'TEMPSTO;DAY', 'TEMPSIRD;DAY', 'TEMPMOS;DAY', 'TEMPFAG;DAY', 'TEMPALTA;DAY', 'TEMPBOD;DAY', 'TEMPKONG;DAY',

@@ -4,6 +4,8 @@
 # For example, Monday is before Tuesday, and Monday is after Sunday. 
 # Same applies to the other features, day of week etc. 
 
+import pandas as pd
+
 def calendar_transformer(df):
     '''Extracts calendar features from datetime index'''
     from feature_engine.datetime import DatetimeFeatures
@@ -34,4 +36,6 @@ def get_holidays(df):
     
     holidays_dict = holidays.Sweden()
     holidays_list = [date in holidays_dict for date in df.index]
-    return pd.DataFrame({'holidays': holidays_list}, index=df.index)
+    holidays_features = pd.DataFrame({'holidays': holidays_list}, index=df.index)
+    
+    return holidays_features.astype(int) #Convert from bool to int
