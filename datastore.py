@@ -4,7 +4,7 @@ import urllib.parse as url
 #Due to SKM limiting data requests to 5 years at a time, we need to split the requests.
 initial_date = '01.01.2018'
 second_date = '01.01.2021'
-final_date = '0'
+final_date = '-1'
 final_date_forecast = 'd+7'
 
 start_date = [initial_date, second_date]

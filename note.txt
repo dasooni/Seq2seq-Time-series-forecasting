@@ -1,0 +1,9 @@
+#In my case, trainX has a shape (12809, 14, 5). 
+#12809 because we are looking back 14 days (12823 - 14 = 12809). 
+#Remember that we cannot look back 14 days until we get to the 15th day. 
+#Also, trainY has a shape (12809, 1). Our model only predicts a single value, but 
+#it needs multiple variables (5 in my example) to make this prediction. 
+#This is why we can only predict a single day after our training, the day after where our data ends.
+#To predict more days in future, we need all the 5 variables which we do not have. 
+#We need to predict all variables if we want to do that. 
+
