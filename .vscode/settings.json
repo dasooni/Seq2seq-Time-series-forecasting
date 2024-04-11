@@ -1,0 +1,8 @@
+{
+    "vscord.app.privacyMode.enable": true,
+    "vscord.status.idle.check": false,
+    "vscord.status.idle.enabled": false,
+    "vscord.status.problems.enabled": false,
+    "vscord.status.details.enabled": false,
+    "vscord.status.details.idle.enabled": false
+}

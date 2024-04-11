@@ -4,7 +4,7 @@ import urllib.parse as url
 #Due to SKM limiting data requests to 5 years at a time, we need to split the requests.
 initial_date = '01.01.2018'
 second_date = '01.01.2021'
-final_date = '-1'
+final_date = '29.02.2024'
 final_date_forecast = 'd+7'
 
 start_date = [initial_date, second_date]
@@ -44,13 +44,42 @@ def getSpotPrice(symbol = ['SPOTSE3']):
     return fetch_skm_data(symbol, ['spotPrice'] )
 
 #Hourly!
-def getProductionGWh(symbol = ['PROSE1', 'PROSE2', 'PROSE3', 'PROSE4']):
-    return fetch_skm_data(symbol, ['ProductionSE1GWh', 'ProductionSE2GWh', 'ProductionSE3GWh', 'ProductionSE4GWh'])
-def getConsumptionGWh(symbol = ['CNPSE1', 'CNPSE2', 'CNPSE3', 'CNPSE4']):
-    return fetch_skm_data(symbol, ['ConsumptionSE1GWh','ConsumptionSE2GWh','ConsumptionSE3GWh','ConsumptionSE4GWh'])
+def getTotalConsumptionProduction(symbol = ['CNPSE3', 'PROSE3']): # GWh
+    return fetch_skm_data(symbol, ['ConsumptionGWh', 'ProductionGWh'] )
+# TRANSMISSION UMM
+def getTransmissionCapTo(symbol = ['Transmission#Cap#DK1SE3', 'Transmission#Cap#NO1SE3', 
+                                   'Transmission#Cap#SE2SE3', 'Transmission#Cap#FISE3', 
+                                   'Transmission#Cap#SE4SE3']):
+    return fetch_skm_data(symbol, ['TDK1SE3', 'TNO1SE3', 'TSE2SE3', 'TF1SE3', 'TSE4SE3'])    
 
-def getCapacityTo(symbol = ['SCAPSE2SE3', 'SCAPDK1SE3', 'SCAPFISE3', 'SCAPSE4SE3']):
-    return fetch_skm_data(symbol, ['SE2SE3', 'DK1SE3', 'FISE3', 'SE4SE3'] )
+def getTransmissionCapFrom(symbol = ['Transmission#Cap#SE3DK1', 'Transmission#Cap#SE3NO1', 
+                                   'Transmission#Cap#SE3SE2', 'Transmission#Cap#SE3FI', 
+                                   'Transmission#Cap#SE3SE4']):
+    return fetch_skm_data(symbol, ['TSE3DK1', 'TSE3NO1', 'TSE3SE2', 'TSE3F1', 'TSE3SE4'])    
+
+#NET Exchange flow SE3 (MWh) (import - export)
+def getNetFlow(symbol = ['SFLOWSE3']):
+    return fetch_skm_data(symbol, ['NetFlowSE3'] )
+
+def getFlow(symbol = ['SFLOWSE2SE3', 'SFLOWSE3FI', 'SFLOWSE3SE4']):
+    return fetch_skm_data(symbol, ['F_LOWSE2SE3', 'F_LOWSE3FI', 'F_LOWSE3SE4'] )
+
+# Capacity data in MWH
+def getFlowCapacityTo(symbol = ['SCAPSE4SE3', 'SCAPDK1SE3', 'SCAPFISE3', 'SCAPNO1SE3', 'SCAPSE2SE3']):
+    return fetch_skm_data(symbol,  ['C_SE4SE3', 'C_DK1SE3', 'C_FISE3', 'C_NO1SE3', 'C_SE2SE3'] )
+
+def getFlowCapacityFrom(symbol = ['SCAPSE3DK1', 'SCAPSE3FI', 'SCAPSE3NO1', 'SCAPSE3SE2', 'SCAPSE3SE4']):
+    return fetch_skm_data(symbol,  ['C_SE3DK1', 'C_SE3FI', 'C_SE3NO1', 'C_SE3SE2', 'C_SE3SE4'] )
+
+# Power exchange in GWh
+def getExchangeFrom(symbol = ['EXHSE3_FI', 'EXHSE3_NO1', 'EXHSE3_DK1', 'EXHSE3_SE4', 'EXHSE3_SE2']):
+    return fetch_skm_data(symbol,  ['ESE3_FI', 'ESE3_NO1', 'ESE3_DK1', 'ESE3_SE4', 'ESE3_SE2'] )
+
+def getExchangeTo(symbol =  ['EXHFI_SE3', 'EXHDK1_SE3', 'EXHSE2_SE3', 'EXHSE4_SE3', 'EXHNO1_SE3']):
+    return fetch_skm_data(symbol,  ['EFI_SE3', 'EDK1_SE3', 'ESE2_SE3', 'ESE4_SE3', 'ENO1_SE3'] )
+
+def getTurnover(symbol =  ['TOVERSE3_SK', 'TOVERSE3_SS']):
+    return fetch_skm_data(symbol,  ['TurnoverB', 'TurnoverS'] )
 # --
 
 # -- Svenska Kraftnät
@@ -69,10 +98,12 @@ def getAllSE4ProductionMWh(symbol = ['PROSE4WAT', 'PROSE4WINDON_ENTSOE', 'PROSE4
 # --
 
 # -- SMHI  
-def getDailyWeather(symbol = ['TEMPSE;DAY', 'PENSE;DAY' ]):
+def getDailyWeather(symbol = ['TEMPSE;DAY', 'PENSE;DAY' ]): # Precipitation Energy in GWh!
     return fetch_skm_data(symbol, ['Temperature(day)', 'PrecipitationEnergySE(day)'])
 def getDailyPerEnergy_Norway_Finland(symbol = [ 'PENNO;DAY', 'PENFI;DAY']):
     return fetch_skm_data(symbol, ['PrecipitationEnergyNO(day)', 'PrecipitationEnergyFI(day)'])
+def getHourlyWindVelocity(symbol = ['WINDPITE']): # Wind velocity in m/s
+    return fetch_skm_data(symbol, ['Wind(Pite)'])
 
 def getDailyWeather_all(symbol = ['TEMPSUND;DAY', 'TEMPFALU;DAY', 'TEMPKARLK;DAY', 'TEMPRONNE;DAY', 'TEMPOSL;DAY', 'TEMPBER;DAY', 'TEMPTRH;DAY', 'TEMPTRM;DAY',
                                   'TEMPKRS;DAY', 'TEMPSTO;DAY', 'TEMPSIRD;DAY', 'TEMPMOS;DAY', 'TEMPFAG;DAY', 'TEMPALTA;DAY', 'TEMPBOD;DAY', 'TEMPKONG;DAY',
@@ -87,7 +118,6 @@ def getDailyWeather_all(symbol = ['TEMPSUND;DAY', 'TEMPFALU;DAY', 'TEMPKARLK;DAY
                                    'TEMPGUNN;DAY', 'TEMPOSTE;DAY', 'TEMPLUND;DAY', 'TEMPSTAV;DAY', 'TEMPVENA;DAY', 'TEMPSAUD;DAY', 'TEMPMALU;DAY', 'TEMPFORD;DAY', 
                                    'TEMPARH;DAY', 'TEMPHEL;DAY', 'TEMPCOP;DAY', 'TEMPBARDU;DAY', 'TEMPVISBY;DAY', 'TEMPSARN;DAY', 'TEMPHAPA;DAY', 'TEMPKARE;DAY',
                                    'TEMPFRAN;DAY', 'TEMPBERL;DAY', 'TEMPPUD;DAY', 'TEMPSODA;DAY'] )
-    
 # -- Metno
 def getHourlyTempAll(symbol = ['TEMPVALDRES', 'TEMPVIKSND', 'TEMPTYNSET', 'TEMPUVDAL', 'TEMPSTANGE', 
                                'TEMPSTEINKJR', 'TEMPHONFSS', 'TEMPMOSJ', 'TEMPSVOLVR', 'TEMPHAMRFST', 
@@ -110,8 +140,8 @@ def getHourlyTempAll(symbol = ['TEMPVALDRES', 'TEMPVIKSND', 'TEMPTYNSET', 'TEMPU
 # --    
 
 # -- Svensk Energi
-def getWeeklyHydroReservs(symbol = ['WATSE;WEEK', 'WATSE3;WEEK']):
-    return fetch_skm_data(symbol, ['HydroRes(GWh_week)', 'HydroResSE3(GWh_week)'] )
+def getWeeklyHydroReservs(symbol = ['WATSE;WEEK']):
+    return fetch_skm_data(symbol, ['HydroRes(GWh_week)'] )
 #--
 
 # -- EEX, ENTSOE
@@ -129,20 +159,6 @@ def getHourlyProduction_nuclear_EU(symbol = ['PROFINUC_ENTSOE', 'PRODENUC_ENTSOE
 
 # -- PAST + WEEK AHEAD PLANNED DATA UMM
 
-def getStationCap_forecast(symbol = ['Station#Cap#9297', 'Station#Cap#9309', 'Station#Cap#8007', 'Station#Cap#9280', 'Station#Cap#9282', 'Station#Cap#9421', 
-                                    'Station#Cap#9343', 'Station#Cap#2983', 'Station#Cap#12422', 'Station#Cap#10222', 'Station#Cap#9377', 'Station#Cap#12831', 
-                                    'Station#Cap#12833', 'Station#Cap#8016', 'Station#Cap#9284', 'Station#Cap#9286', 'Station#Cap#8011', 'Station#Cap#9288', 
-                                    'Station#Cap#9290', 'Station#Cap#9292', 'Station#Cap#9401', 'Station#Cap#9415', 'Station#Cap#12717', 
-                                    'Station#Cap#3472', 'Station#Cap#3475', 'Station#Cap#9426', 'Station#Cap#3594', 
-                                    'Station#Cap#9434']):
-    return fetch_skm_data(symbol, ['sCapAros', 'sCapBravallaverket', 'sCapForsmarkB1', 'sCapForsmarkB2', 'sCapForsmarkB3', 'sCapFyrisKraftvarmeverk', 
-                                   'sCapHändeloverket', 'sCapHoljes', 'sCapJadraasHallasen', 'sCapKarskarG4', 'sCapMarviken', 'sCapMalarberget', 
-                                   'sCapNysater', 'sCapOskarshamn1', 'sCapOskarshamn2', 'sCapOskarshamn3', 'sCapRinghalsB1', 'sCapRinghalsB2', 
-                                   'sCapRinghalsB3', 'sCapRinghalsB4',  'sCapRyaKVV', 'sCapStenungsund', 'sCapSvartnas', 
-                                   'sCapTrollhattan', 'sCapTrangslet', 'sCapVartan', 'sCapAlvkarleby', 
-                                   'sCapAbyverket'], start_date=start_date, end_date=[second_date, final_date_forecast])
-    
-    
 #There is no SE1 -> SE3 and SE3 -> SE1
 def getTransmissionCapTo_forecast(symbol = ['Transmission#Cap#DK1SE3', 'Transmission#Cap#NO1SE3', 
                                    'Transmission#Cap#SE2SE3', 'Transmission#Cap#FISE3', 
