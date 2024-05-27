@@ -1,0 +1,162 @@
+# FIRST RUN!
+
+{'latent_dim': 96,
+ 'dropout': 0.2,
+ 'lstm_activation': 'tanh',
+ 'activation': 'relu',
+ 'optimizer': 'rmsprop',
+ 'tuner/epochs': 10,
+ 'tuner/initial_epoch': 0,
+ 'tuner/bracket': 0,
+ 'tuner/round': 0}
+
+val_loss: 0.14577051997184753
+
+
+# 2
+val_loss So Far: 0.1496780812740326
+
+Value             |Best Value So Far |Hyperparameter
+32                |64                |encoder_units
+0.1               |0                 |encoder_dropout
+0                 |0                 |encoder_dropout_recurrent
+sigmoid           |tanh              |encoder_activation
+sigmoid           |sigmoid           |encoder_recurrent_activation
+0.4               |0.1               |decoder_dropout
+0.1               |0.2               |decoder_dropout_recurrent
+tanh              |relu              |decoder_activation
+2                 |2                 |num_dense_layers
+silu              |relu              |dense_activation
+relu              |linear            |output_activation
+adam              |adam              |optimizer
+64                |160               |dense_units_0
+224               |480               |dense_units_1
+352               |192               |dense_units_2
+224               |352               |dense_units_3
+2                 |2                 |tuner/epochs
+0                 |0                 |tuner/initial_epoch
+4                 |4                 |tuner/bracket
+0                 |0                 |tuner/round
+
+
+# 3
+
+Value             |Best Value So Far |Hyperparameter
+16                |64                |encoder_units
+0                 |0                 |encoder_dropout
+0.3               |0                 |encoder_dropout_recurrent
+tanh              |tanh              |encoder_activation
+sigmoid           |sigmoid           |encoder_recurrent_activation
+0                 |0.1               |decoder_dropout
+0                 |0.2               |decoder_dropout_recurrent
+sigmoid           |relu              |decoder_activation
+0                 |2                 |num_dense_layers
+relu              |relu              |dense_activation
+relu              |linear            |output_activation
+adam              |adam              |optimizer
+416               |160               |dense_units_0
+416               |480               |dense_units_1
+192               |192               |dense_units_2
+384               |352               |dense_units_3
+4                 |4                 |tuner/epochs
+2                 |2                 |tuner/initial_epoch
+4                 |4                 |tuner/bracket
+1                 |1                 |tuner/round
+0006              |0035              |tuner/trial_id
+128               |64                |neurons (same thing
+
+
+#4
+Best val_loss So Far: 0.14463575184345245
+Search: Running Trial #161
+
+Value             |Best Value So Far |Hyperparameter
+64                |256               |neurons
+0                 |0.1               |encoder_dropout
+0.2               |0.4               |encoder_dropout_recurrent
+tanh              |tanh              |encoder_activation
+sigmoid           |sigmoid           |encoder_recurrent_activation
+0.1               |0.2               |decoder_dropout
+0.3               |0.2               |decoder_dropout_recurrent
+relu              |tanh              |decoder_activation
+2                 |1                 |num_dense_layers
+silu              |relu              |dense_activation
+relu              |linear            |output_activation
+adam              |adam              |optimizer
+16                |16                |dense_units_0
+16                |8                 |dense_units_1
+8                 |8                 |dense_units_2
+4                 |4                 |tuner/epochs
+0                 |0                 |tuner/initial_epoch
+3                 |3                 |tuner/bracket
+0                 |0                 |tuner/round
+
+
+#5
+
+Best val_loss So Far: 0.1444959193468094
+
+Value             |Best Value So Far |Hyperparameter
+32                |64                |neurons
+0.4               |0                 |encoder_dropout
+0                 |0.2               |encoder_dropout_recurrent
+sigmoid           |tanh              |encoder_activation
+sigmoid           |sigmoid           |encoder_recurrent_activation
+0.2               |0.1               |decoder_dropout
+0.3               |0.3               |decoder_dropout_recurrent
+relu              |relu              |decoder_activation
+1                 |2                 |num_dense_layers
+relu              |silu              |dense_activation
+relu              |relu              |output_activation
+adam              |adam              |optimizer
+64                |16                |dense_units_0
+32                |16                |dense_units_1
+256               |8                 |dense_units_2
+12                |12                |tuner/epochs
+4                 |4                 |tuner/initial_epoch
+3                 |3                 |tuner/bracket
+1                 |1                 |tuner/round
+0159              |0160              |tuner/trial_id
+
+#6
+
+Best val_loss So Far: 0.13752323389053345
+
+Value             |Best Value So Far |Hyperparameter
+16                |64                |neurons
+0.1               |0                 |encoder_dropout
+0.4               |0.2               |encoder_dropout_recurrent
+tanh              |tanh              |encoder_activation
+sigmoid           |sigmoid           |encoder_recurrent_activation
+0.4               |0.1               |decoder_dropout
+0                 |0.3               |decoder_dropout_recurrent
+tanh              |relu              |decoder_activation
+2                 |2                 |num_dense_layers
+relu              |silu              |dense_activation
+linear            |relu              |output_activation
+adam              |adam              |optimizer
+128               |16                |dense_units_0
+16                |16                |dense_units_1
+64                |8                 |dense_units_2
+34                |34                |tuner/epochs
+12                |12                |tuner/initial_epoch
+3                 |3                 |tuner/bracket
+2                 |2                 |tuner/round
+0182              |0180              |tuner/trial_id
+
+
+#7
+~0.1447
+|Best Value So Far |Hyperparameter
+8                 |16                |neurons
+0.3               |0.2               |decoder_dropout
+1                 |1                 |num_dense_layers
+relu              |relu              |dense_activation
+2                 |2                 |num_encoder_layers
+2                 |2                 |num_decoder_layers
+rmsprop           |rmsprop           |optimizer
+8                 |32                |dense_units_0
+6                 |2                 |tuner/epochs
+0                 |0                 |tuner/initial_epoch
+2                 |3                 |tuner/bracket
+0                 |0                 |tuner/round

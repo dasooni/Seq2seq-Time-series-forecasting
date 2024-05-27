@@ -4,8 +4,9 @@ import urllib.parse as url
 #Due to SKM limiting data requests to 5 years at a time, we need to split the requests.
 initial_date = '01.01.2018'
 second_date = '01.01.2021'
-final_date = '29.02.2024'
-final_date_forecast = 'd+7'
+final_date = '31.12.2023'
+
+final_date_forecast = 'd+7' # unused
 
 start_date = [initial_date, second_date]
 end_date = [second_date, final_date]
@@ -72,11 +73,15 @@ def getFlowCapacityFrom(symbol = ['SCAPSE3DK1', 'SCAPSE3FI', 'SCAPSE3NO1', 'SCAP
     return fetch_skm_data(symbol,  ['C_SE3DK1', 'C_SE3FI', 'C_SE3NO1', 'C_SE3SE2', 'C_SE3SE4'] )
 
 # Power exchange in GWh
+def getNetExchange(symbol = ['EXHSE']):
+    return fetch_skm_data(symbol,  ['ESE'] )
+
 def getExchangeFrom(symbol = ['EXHSE3_FI', 'EXHSE3_NO1', 'EXHSE3_DK1', 'EXHSE3_SE4', 'EXHSE3_SE2']):
     return fetch_skm_data(symbol,  ['ESE3_FI', 'ESE3_NO1', 'ESE3_DK1', 'ESE3_SE4', 'ESE3_SE2'] )
 
 def getExchangeTo(symbol =  ['EXHFI_SE3', 'EXHDK1_SE3', 'EXHSE2_SE3', 'EXHSE4_SE3', 'EXHNO1_SE3']):
     return fetch_skm_data(symbol,  ['EFI_SE3', 'EDK1_SE3', 'ESE2_SE3', 'ESE4_SE3', 'ENO1_SE3'] )
+
 
 def getTurnover(symbol =  ['TOVERSE3_SK', 'TOVERSE3_SS']):
     return fetch_skm_data(symbol,  ['TurnoverB', 'TurnoverS'] )
@@ -98,50 +103,17 @@ def getAllSE4ProductionMWh(symbol = ['PROSE4WAT', 'PROSE4WINDON_ENTSOE', 'PROSE4
 # --
 
 # -- SMHI  
-def getDailyWeather(symbol = ['TEMPSE;DAY', 'PENSE;DAY' ]): # Precipitation Energy in GWh!
-    return fetch_skm_data(symbol, ['Temperature(day)', 'PrecipitationEnergySE(day)'])
+def getDailyPerc(symbol = ['PENSE;DAY' ]): # Precipitation Energy in GWh!
+    return fetch_skm_data(symbol, ['PrecipitationEnergySE(day)'])
 def getDailyPerEnergy_Norway_Finland(symbol = [ 'PENNO;DAY', 'PENFI;DAY']):
     return fetch_skm_data(symbol, ['PrecipitationEnergyNO(day)', 'PrecipitationEnergyFI(day)'])
 def getHourlyWindVelocity(symbol = ['WINDPITE']): # Wind velocity in m/s
     return fetch_skm_data(symbol, ['Wind(Pite)'])
-
-def getDailyWeather_all(symbol = ['TEMPSUND;DAY', 'TEMPFALU;DAY', 'TEMPKARLK;DAY', 'TEMPRONNE;DAY', 'TEMPOSL;DAY', 'TEMPBER;DAY', 'TEMPTRH;DAY', 'TEMPTRM;DAY',
-                                  'TEMPKRS;DAY', 'TEMPSTO;DAY', 'TEMPSIRD;DAY', 'TEMPMOS;DAY', 'TEMPFAG;DAY', 'TEMPALTA;DAY', 'TEMPBOD;DAY', 'TEMPKONG;DAY',
-                                  'TEMPSELB;DAY', 'TEMPTAFJ;DAY', 'TEMPEIDF;DAY', 'TEMPGOTB;DAY', 'TEMPKATT;DAY', 'TEMPMLMS;DAY', 'TEMPVAX;DAY', 'TEMPRITS;DAY', 
-                                  'TEMPGUNN;DAY', 'TEMPOSTE;DAY', 'TEMPLUND;DAY', 'TEMPSTAV;DAY', 'TEMPVENA;DAY', 'TEMPSAUD;DAY', 'TEMPMALU;DAY', 'TEMPFORD;DAY', 
-                                  'TEMPARH;DAY', 'TEMPHEL;DAY', 'TEMPCOP;DAY', 'TEMPBARDU;DAY', 'TEMPVISBY;DAY', 'TEMPSARN;DAY', 'TEMPHAPA;DAY', 'TEMPKARE;DAY', 
-                                  'TEMPFRAN;DAY', 'TEMPBERL;DAY', 'TEMPPUD;DAY', 'TEMPSODA;DAY']):
-    
-    return fetch_skm_data(symbol, ['TEMPSUND;DAY', 'TEMPFALU;DAY', 'TEMPKARLK;DAY', 'TEMPRONNE;DAY', 'TEMPOSL;DAY', 'TEMPBER;DAY', 'TEMPTRH;DAY', 'TEMPTRM;DAY', 
-                                   'TEMPKRS;DAY', 'TEMPSTO;DAY', 'TEMPSIRD;DAY', 'TEMPMOS;DAY', 'TEMPFAG;DAY', 'TEMPALTA;DAY', 'TEMPBOD;DAY', 'TEMPKONG;DAY', 
-                                   'TEMPSELB;DAY', 'TEMPTAFJ;DAY', 'TEMPEIDF;DAY', 'TEMPGOTB;DAY', 'TEMPKATT;DAY', 'TEMPMLMS;DAY', 'TEMPVAX;DAY', 'TEMPRITS;DAY', 
-                                   'TEMPGUNN;DAY', 'TEMPOSTE;DAY', 'TEMPLUND;DAY', 'TEMPSTAV;DAY', 'TEMPVENA;DAY', 'TEMPSAUD;DAY', 'TEMPMALU;DAY', 'TEMPFORD;DAY', 
-                                   'TEMPARH;DAY', 'TEMPHEL;DAY', 'TEMPCOP;DAY', 'TEMPBARDU;DAY', 'TEMPVISBY;DAY', 'TEMPSARN;DAY', 'TEMPHAPA;DAY', 'TEMPKARE;DAY',
-                                   'TEMPFRAN;DAY', 'TEMPBERL;DAY', 'TEMPPUD;DAY', 'TEMPSODA;DAY'] )
-# -- Metno
-def getHourlyTempAll(symbol = ['TEMPVALDRES', 'TEMPVIKSND', 'TEMPTYNSET', 'TEMPUVDAL', 'TEMPSTANGE', 
-                               'TEMPSTEINKJR', 'TEMPHONFSS', 'TEMPMOSJ', 'TEMPSVOLVR', 'TEMPHAMRFST', 
-                               'TEMPHARSTD', 'TEMPARNDL', 'TEMPBO', 'TEMPFLORO', 'TEMPSANDFJ', 
-                               'TEMPALESND', 'TEMPDRAMN', 'TEMPHAMAR', 'TEMPNOTODN', 'TEMPLHMR', 'TEMPFAG', 
-                               'TEMPOSL', 'TEMPKONG', 'TEMPMELS', 'TEMPSARP', 'TEMPFJER', 'TEMPBUHLM', 
-                               'TEMPGEILO', 'TEMPMOL', 'TEMPVIGR', 'TEMPTAFJ', 'TEMPVENA', 'TEMPSGNDL', 
-                               'TEMPSAUD', 'TEMPKRS', 'TEMPSTAV', 'TEMPBER', 'TEMPKRSU', 'TEMPSUNN', 
-                               'TEMPRORO', 'TEMPTRH', 'TEMPNMS', 'TEMPMAJA', 'TEMPBOD', 'TEMPTRM', 'TEMPALTA', 
-                               'TEMPSLT', 'TEMPFORDE', 'TEMPRENA']):
-    return fetch_skm_data(symbol, ['TEMPVALDRES', 'TEMPVIKSND', 'TEMPTYNSET', 'TEMPUVDAL', 'TEMPSTANGE', 
-                               'TEMPSTEINKJR', 'TEMPHONFSS', 'TEMPMOSJ', 'TEMPSVOLVR', 'TEMPHAMRFST', 
-                               'TEMPHARSTD', 'TEMPARNDL', 'TEMPBO', 'TEMPFLORO', 'TEMPSANDFJ', 
-                               'TEMPALESND', 'TEMPDRAMN', 'TEMPHAMAR', 'TEMPNOTODN', 'TEMPLHMR', 'TEMPFAG', 
-                               'TEMPOSL', 'TEMPKONG', 'TEMPMELS', 'TEMPSARP', 'TEMPFJER', 'TEMPBUHLM', 
-                               'TEMPGEILO', 'TEMPMOL', 'TEMPVIGR', 'TEMPTAFJ', 'TEMPVENA', 'TEMPSGNDL', 
-                               'TEMPSAUD', 'TEMPKRS', 'TEMPSTAV', 'TEMPBER', 'TEMPKRSU', 'TEMPSUNN', 
-                               'TEMPRORO', 'TEMPTRH', 'TEMPNMS', 'TEMPMAJA', 'TEMPBOD', 'TEMPTRM', 'TEMPALTA', 
-                               'TEMPSLT', 'TEMPFORDE', 'TEMPRENA'])
 # --    
 
 # -- Svensk Energi
-def getWeeklyHydroReservs(symbol = ['WATSE;WEEK']):
-    return fetch_skm_data(symbol, ['HydroRes(GWh_week)'] )
+def getWeeklyHydro(symbol = ['WATSE;WEEK', 'HBALSE;WEEK']):
+    return fetch_skm_data(symbol, ['HydroRes(GWh_week)', 'HydroBalance(GWh_week)'] )
 #--
 
 # -- EEX, ENTSOE
@@ -156,7 +128,6 @@ def getHourlyProduction_nuclear_EU(symbol = ['PROFINUC_ENTSOE', 'PRODENUC_ENTSOE
     return fetch_skm_data(symbol, ['nucFI(MWh)', 'nucDE(MWh)'] )
 # --
 
-
 # -- PAST + WEEK AHEAD PLANNED DATA UMM
 
 #There is no SE1 -> SE3 and SE3 -> SE1
@@ -168,15 +139,10 @@ def getTransmissionCapTo_forecast(symbol = ['Transmission#Cap#DK1SE3', 'Transmis
 def getTransmissionCapFrom_forecast(symbol = ['Transmission#Cap#SE3DK1', 'Transmission#Cap#SE3NO1', 
                                    'Transmission#Cap#SE3SE2', 'Transmission#Cap#SE3FI', 
                                    'Transmission#Cap#SE3SE4']):
-    return fetch_skm_data(symbol, ['TSE3DK1', 'TSE3NO1', 'TSE3SE2', 'TSE3F1', 'TSE3SE4'] , start_date=start_date, end_date=[second_date, final_date_forecast])    
+    return fetch_skm_data(symbol, ['TSE3DK1', 'TSE3NO1', 'TSE3SE2', 'TSE3F1', 'TSE3SE4'] , start_date=start_date, end_date=[second_date, final_date_forecast])
 
-def getProductionCap_forecast(symbol = ['Import#Cap#SE3', 'Export#Cap#SE3', 'Nuclear#Cap#SE3', 
-                                       'Wind#Cap#SE3', 'Coal#Cap#SE3', 'Gas#Cap#SE3', 
-                                       'Hydro#Cap#SE3', 'Oil#Cap#SE3', 'Other#Cap#SE3']):
-    return fetch_skm_data(symbol, ['AvailableImportCap', 'AvailableExportCap', 'AvailableNuclearCap', 
-                                   'AvailableWindCap', 'AvailableCoalCap', 'AvailableGasCap',
-                                   'AvailableHydroCap', 'AvailableOilCap', 'AvailableCapOther'], start_date=start_date, end_date=[second_date, final_date_forecast])    
-
+def getTotalConsumptionProduction_future(symbol = ['CNPSE3', 'PROSENP_F']): # GWh
+    return fetch_skm_data(symbol, ['ConsumptionGWh', 'ProductionGWh'] )
 # Example usage
 # test = data_extractor(['PROSE3'], ['ProductionGWh'], '01.01.2021')
 # print(test.describe())
